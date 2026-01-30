@@ -33,6 +33,7 @@
 
     .wrap{max-width:var(--max);margin:0 auto;padding:26px 18px 70px}
 
+    /* Header */
     .topbar{
       display:flex;
       justify-content:space-between;
@@ -42,13 +43,39 @@
       position:relative;
       z-index:50;
     }
-    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
-    .logo{
-      width:36px;height:36px;border-radius:12px;
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:900;
+    }
+
+    /* ✅ Logo image (preferred) + fallback circle if image missing */
+    .logo-wrap{
+      width:42px;height:42px;
+      border-radius:14px;
       background:linear-gradient(135deg,#e27a2d,#ffb17a);
-      box-shadow:0 10px 20px rgba(226,122,45,.25);
+      box-shadow:0 10px 20px rgba(226,122,45,.22);
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
       flex:0 0 auto;
     }
+    .logo-img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      background:#fff;
+    }
+
+    /* ✅ Larger brand text */
+    .brand-title{
+      font-size:16px;
+      line-height:1.1;
+      letter-spacing:.2px;
+    }
+    .tiny{font-size:12px;color:rgba(0,0,0,.55)}
 
     .nav{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
     .nav a{
@@ -75,7 +102,6 @@
       box-shadow:0 12px 22px rgba(226,122,45,.25);
       cursor:pointer;
       user-select:none;
-      pointer-events:auto;
       white-space:nowrap;
     }
     .btn:hover{filter:brightness(.98)}
@@ -87,6 +113,7 @@
     }
     .btn.secondary:hover{background:rgba(255,255,255,.75)}
 
+    /* Less distracting pricing button */
     .btn.ghost{
       background:transparent;
       color:rgba(0,0,0,.72);
@@ -99,8 +126,6 @@
       display:grid;
       grid-template-columns:1.2fr 1fr 1fr;
       gap:18px;
-      position:relative;
-      z-index:1;
     }
     @media(max-width:980px){ .grid{grid-template-columns:1fr} }
 
@@ -110,8 +135,6 @@
       border-radius:var(--radius);
       padding:22px;
       box-shadow:var(--shadow);
-      position:relative;
-      z-index:1;
     }
     .soft{
       background:rgba(255,255,255,.6);
@@ -140,7 +163,6 @@
 
     p{margin:0 0 10px;color:var(--muted)}
     .em{color:var(--ink);font-weight:800}
-    .tiny{font-size:12px;color:rgba(0,0,0,.55)}
     .underline{
       background:rgba(226,122,45,.35);
       padding:0 6px;
@@ -151,6 +173,7 @@
     ul{margin:10px 0 0;padding-left:18px;color:rgba(0,0,0,.72)}
     li{margin-bottom:8px}
 
+    /* Pricing */
     .two-col{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -158,6 +181,30 @@
     }
     @media(max-width:980px){ .two-col{grid-template-columns:1fr} }
 
+    .price-box{
+      border:1px solid rgba(0,0,0,.10);
+      border-radius:14px;
+      padding:14px;
+    }
+    /* ✅ Smaller pricing fonts */
+    .price-num{
+      font-weight:950;
+      font-size:18px;
+      line-height:1.15;
+    }
+    .price-sub{
+      font-weight:800;
+      font-size:13px;
+      color:rgba(0,0,0,.70);
+      margin-top:4px;
+    }
+    .price-note{
+      font-size:11px;
+      color:rgba(0,0,0,.55);
+      margin:0 0 8px;
+    }
+
+    /* Form */
     form{display:grid;gap:10px;margin-top:10px}
     input,textarea,select{
       width:100%;
@@ -173,20 +220,41 @@
       border-color: rgba(226,122,45,.55);
       box-shadow:0 0 0 4px rgba(226,122,45,.12);
     }
-    button{
+
+    /* Buttons in form */
+    .form-actions{
+      display:grid;
+      gap:10px;
+      margin-top:2px;
+    }
+    .btn-block{
+      width:100%;
       padding:12px 16px;
       border-radius:999px;
       border:none;
-      background:var(--accent);
-      color:#fff;
       font-weight:900;
       cursor:pointer;
+      text-align:center;
+    }
+    .btn-block.primary{
+      background:var(--accent);
+      color:#fff;
       box-shadow:0 12px 22px rgba(226,122,45,.25);
     }
-    button:hover{filter:brightness(.98)}
+    .btn-block.primary:hover{filter:brightness(.98)}
+
+    /* ✅ Bring back “previous style” for the instant audit button (orange, rounded) */
+    .btn-block.secondary{
+      background:#fff;
+      color:var(--ink);
+      border:1px solid rgba(0,0,0,.14);
+      box-shadow:none;
+    }
+    .btn-block.secondary:hover{background:rgba(0,0,0,.03)}
 
     .footer{margin-top:18px;text-align:center;font-size:13px;color:rgba(0,0,0,.55)}
 
+    /* Instant audit output */
     .report{
       border:1px solid rgba(0,0,0,.10);
       border-radius:16px;
@@ -194,7 +262,6 @@
       background:rgba(255,255,255,.8);
       margin-top:12px;
     }
-    .report h3{margin-bottom:6px}
     .badge{
       display:inline-flex;align-items:center;gap:8px;
       padding:8px 12px;border-radius:999px;
@@ -203,6 +270,7 @@
       margin-right:8px;margin-top:8px;
     }
 
+    /* Modal */
     .modal-backdrop{
       position:fixed; inset:0;
       background:rgba(0,0,0,.35);
@@ -226,7 +294,6 @@
       background:linear-gradient(135deg, rgba(226,122,45,.10), rgba(255,255,255,.9));
       border-bottom:1px solid rgba(0,0,0,.08);
     }
-    .modal-head h3{margin:0}
     .modal-body{padding:18px}
     .modal-actions{
       padding:16px 18px;
@@ -254,11 +321,17 @@
 
 <body>
 <div class="wrap">
+
+  <!-- TOP BAR -->
   <div class="topbar">
     <div class="brand">
-      <div class="logo" aria-hidden="true"></div>
+      <div class="logo-wrap" aria-hidden="true">
+        <!-- ✅ Add your logo file as logo.png in same folder -->
+        <img class="logo-img" src="logo.png" alt="BridgeBay logo"
+             onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg,#e27a2d,#ffb17a)';" />
+      </div>
       <div>
-        BridgeBay Digital Solutions<br>
+        <div class="brand-title">BridgeBay Digital Solutions</div>
         <span class="tiny">USA • Bangladesh</span>
       </div>
     </div>
@@ -270,10 +343,13 @@
       <a href="#contact">Contact</a>
     </nav>
 
-    <a class="btn js-open-audit" href="#contact">Free Audit</a>
+    <!-- ✅ Removed top-right Free Audit button -->
   </div>
 
+  <!-- MAIN GRID -->
   <div class="grid">
+
+    <!-- COLUMN 1 -->
     <div style="display:flex;flex-direction:column;gap:18px;">
       <section class="card" id="headline">
         <h1>
@@ -291,9 +367,7 @@
           <a class="btn ghost" href="#pricing">See Pricing</a>
         </div>
 
-        <div class="tiny" style="margin-top:12px;">
-          Fast response • Clear steps • No long-term contracts
-        </div>
+        <!-- ✅ Removed the "Fast response..." line -->
       </section>
 
       <section class="soft" id="problem">
@@ -307,6 +381,7 @@
       </section>
     </div>
 
+    <!-- COLUMN 2 -->
     <div style="display:flex;flex-direction:column;gap:18px;">
       <section class="card" id="solution">
         <h2>The Restaurant Growth System</h2>
@@ -332,39 +407,39 @@
 
         <div class="cta" style="margin-top:14px;">
           <a class="btn secondary" href="https://wa.me/19125419169" target="_blank" rel="noopener">Chat on WhatsApp (Fastest)</a>
+          <!-- ✅ keep only this button for free audit modal -->
           <a class="btn js-open-audit" href="#contact">Request Free Audit</a>
         </div>
 
         <div class="tiny" style="margin-top:10px;">
-          Tip: For the best results, use the “Instant Free Audit” to generate your overview first.
+          Tip: Click “Request Free Audit” to generate your Instant Audit Overview.
         </div>
       </section>
     </div>
 
+    <!-- COLUMN 3 -->
     <div style="display:flex;flex-direction:column;gap:18px;">
       <section class="card" id="pricing">
         <h2>Simple Pricing</h2>
         <p>Start with a free audit. Upgrade after results.</p>
 
         <div class="two-col" style="margin-top:10px;">
-          <div style="border:1px solid rgba(0,0,0,.10);border-radius:14px;padding:14px;">
+          <div class="price-box">
             <h3>USA</h3>
-            <p class="tiny" style="margin:0 0 8px;">Setup + monthly management</p>
-            <div style="font-weight:950;font-size:22px;">$299 <span class="tiny">setup</span></div>
-            <div style="font-weight:850;">$85 <span class="tiny">/ month</span></div>
+            <p class="price-note">Setup + monthly management</p>
+            <div class="price-num">$299 <span class="tiny">setup</span></div>
+            <div class="price-sub">$85 <span class="tiny">/ month</span></div>
           </div>
 
-          <div style="border:1px solid rgba(0,0,0,.10);border-radius:14px;padding:14px;">
+          <div class="price-box">
             <h3>Bangladesh</h3>
-            <p class="tiny" style="margin:0 0 8px;">Setup + monthly management</p>
-            <div style="font-weight:950;font-size:22px;">৳12,000 <span class="tiny">setup</span></div>
-            <div style="font-weight:850;">৳3,000 <span class="tiny">/ month</span></div>
+            <p class="price-note">Setup + monthly management</p>
+            <div class="price-num">৳12,000 <span class="tiny">setup</span></div>
+            <div class="price-sub">৳3,000 <span class="tiny">/ month</span></div>
           </div>
         </div>
 
-        <div class="cta" style="margin-top:14px;">
-          <a class="btn js-open-audit" href="#contact">Start with Free Audit</a>
-        </div>
+        <!-- ✅ Removed "Start with Free Audit" button -->
       </section>
 
       <section class="card" id="contact">
@@ -388,7 +463,6 @@
         <form id="auditForm" action="https://formspree.io/f/xgoyllqb" method="POST">
           <input type="hidden" name="_subject" value="New Free Audit Request - BridgeBay Digital Solutions">
           <input type="hidden" name="_replyto" value="bridgebayinternational@gmail.com">
-          <!-- ✅ Redirect to thanks.html on Netlify -->
           <input type="hidden" name="_next" value="/thanks.html">
           <input type="hidden" name="instant_audit_overview" id="instant_audit_overview" value="">
 
@@ -401,12 +475,16 @@
           <input type="tel"  name="phone" id="f_phone" placeholder="Phone / WhatsApp">
           <textarea name="message" id="f_message" placeholder="Main goal (more calls, more orders, more foot traffic)"></textarea>
 
-          <button type="submit">Send Request (We’ll Email Your Detailed Report)</button>
+          <div class="form-actions">
+            <button class="btn-block primary" type="submit">
+              Send Request (We’ll Email Your Detailed Report)
+            </button>
 
-          <!-- ✅ FIX: this button should NOT have js-open-audit -->
-          <button type="button" class="icon-btn" id="openInstantAuditBtn">
-            Generate Instant Audit Overview
-          </button>
+            <!-- ✅ Styled “previous style” button -->
+            <button class="btn-block secondary" type="button" id="openInstantAuditBtn">
+              Generate Instant Audit Overview
+            </button>
+          </div>
         </form>
 
         <p class="tiny" style="margin-top:10px;">
@@ -422,6 +500,7 @@
   </div>
 </div>
 
+<!-- Modal: Instant Audit -->
 <div class="modal-backdrop" id="auditModal" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="auditModalTitle">
     <div class="modal-head">
@@ -465,7 +544,6 @@
 </div>
 
 <script>
-  // Footer year
   document.getElementById("y").textContent = new Date().getFullYear();
 
   const modal = document.getElementById('auditModal');
@@ -482,22 +560,26 @@
     modal.setAttribute('aria-hidden','true');
   }
 
-  // ✅ Only open modal from CTAs that have .js-open-audit (anchors)
+  // Only open modal from Free Audit CTAs (anchors)
   document.querySelectorAll('a.js-open-audit').forEach(el => {
-    el.addEventListener('click', () => {
-      setTimeout(openModal, 80);
-    });
+    el.addEventListener('click', () => setTimeout(openModal, 80));
   });
 
-  // ✅ Open modal from the form button explicitly
+  // Open modal from the form button explicitly
   openInstantAuditBtn.addEventListener('click', openModal);
 
   closeModalBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
 
+  function escapeHtml(str){
+    return String(str || "").replace(/[&<>"']/g, (m) => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+  }
+
   function buildOverview(data){
-    const name = data.restaurant.trim();
-    const city = data.city.trim();
+    const name = (data.restaurant || "").trim();
+    const city = (data.city || "").trim();
     const address = (data.address || "").trim();
     const website = (data.website || "").trim();
     const maps = (data.maps || "").trim();
@@ -535,22 +617,9 @@
   <li><b>Offer testing:</b> Test one simple offer (weekday promo / lunch deal) and track messages + calls.</li>
 </ul>
 
-<b>To create your detailed report, we’ll need:</b>
-<ul>
-  <li>Your Google Maps link (or exact business name + address)</li>
-  <li>Top 2–3 competitors nearby</li>
-  <li>Your best-selling items + average order value</li>
-</ul>
-
-<b>Next step:</b> Submit the form below and we will email/WhatsApp your detailed audit + plan + pricing.
+<b>Next step:</b> Submit the form to receive your detailed audit + plan + pricing.
 `;
     return {score: scoreClamped, badges, text};
-  }
-
-  function escapeHtml(str){
-    return str.replace(/[&<>"']/g, (m) => ({
-      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-    }[m]));
   }
 
   function renderOverview(data){
@@ -573,9 +642,7 @@
       `Address: ${data.address || ""}\n` +
       `Website: ${data.website || ""}\n` +
       `Maps: ${data.maps || ""}\n` +
-      `Goal: ${data.goal || ""}\n\n` +
-      `Score: ${out.score}/100\n\n` +
-      `Notes: Overview generated on-page. Detailed audit to be completed manually.`;
+      `Goal: ${data.goal || ""}\n`;
 
     reportBox.style.display = 'block';
 
