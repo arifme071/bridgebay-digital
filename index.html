@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BridgeBay Digital Solutions — Restaurant Growth</title>
 
-  <!-- SEO -->
   <meta name="description" content="BridgeBay Digital Solutions helps restaurants across the USA & Bangladesh get more customers through Google Maps and social media." />
 
   <style>
@@ -34,7 +33,6 @@
 
     .wrap{max-width:var(--max);margin:0 auto;padding:26px 18px 70px}
 
-    /* Header */
     .topbar{
       display:flex;
       justify-content:space-between;
@@ -89,7 +87,6 @@
     }
     .btn.secondary:hover{background:rgba(255,255,255,.75)}
 
-    /* Make "See Pricing" less distracting */
     .btn.ghost{
       background:transparent;
       color:rgba(0,0,0,.72);
@@ -98,7 +95,6 @@
     }
     .btn.ghost:hover{background:rgba(0,0,0,.03)}
 
-    /* Layout */
     .grid{
       display:grid;
       grid-template-columns:1.2fr 1fr 1fr;
@@ -162,7 +158,6 @@
     }
     @media(max-width:980px){ .two-col{grid-template-columns:1fr} }
 
-    /* Form */
     form{display:grid;gap:10px;margin-top:10px}
     input,textarea,select{
       width:100%;
@@ -192,7 +187,6 @@
 
     .footer{margin-top:18px;text-align:center;font-size:13px;color:rgba(0,0,0,.55)}
 
-    /* Instant audit output */
     .report{
       border:1px solid rgba(0,0,0,.10);
       border-radius:16px;
@@ -209,7 +203,6 @@
       margin-right:8px;margin-top:8px;
     }
 
-    /* Modal */
     .modal-backdrop{
       position:fixed; inset:0;
       background:rgba(0,0,0,.35);
@@ -247,6 +240,7 @@
       padding:10px 12px;
       font-weight:900;
       cursor:pointer;
+      color:rgba(0,0,0,.80);
     }
     .icon-btn:hover{background:rgba(0,0,0,.03)}
     .grid2{
@@ -260,8 +254,6 @@
 
 <body>
 <div class="wrap">
-
-  <!-- TOP BAR -->
   <div class="topbar">
     <div class="brand">
       <div class="logo" aria-hidden="true"></div>
@@ -278,14 +270,10 @@
       <a href="#contact">Contact</a>
     </nav>
 
-    <!-- Recommendation: top CTA goes to form -->
     <a class="btn js-open-audit" href="#contact">Free Audit</a>
   </div>
 
-  <!-- MAIN GRID -->
   <div class="grid">
-
-    <!-- COLUMN 1 -->
     <div style="display:flex;flex-direction:column;gap:18px;">
       <section class="card" id="headline">
         <h1>
@@ -299,7 +287,6 @@
         </p>
 
         <div class="cta">
-          <!-- Recommendation: always go to form + open instant audit modal -->
           <a class="btn js-open-audit" href="#contact">Claim Free Audit</a>
           <a class="btn ghost" href="#pricing">See Pricing</a>
         </div>
@@ -320,7 +307,6 @@
       </section>
     </div>
 
-    <!-- COLUMN 2 -->
     <div style="display:flex;flex-direction:column;gap:18px;">
       <section class="card" id="solution">
         <h2>The Restaurant Growth System</h2>
@@ -355,7 +341,6 @@
       </section>
     </div>
 
-    <!-- COLUMN 3 -->
     <div style="display:flex;flex-direction:column;gap:18px;">
       <section class="card" id="pricing">
         <h2>Simple Pricing</h2>
@@ -386,12 +371,10 @@
         <h2>Request Your Free Audit</h2>
         <p class="tiny">We typically reply within 24–48 hours.</p>
 
-        <!-- Recommendation: reassurance above form -->
         <p class="tiny" style="margin-top:6px;">
           No spam. No obligation. We only use this info to prepare your audit.
         </p>
 
-        <!-- Instant Audit Output -->
         <div id="instantReport" class="report" style="display:none;">
           <h3>Instant Audit Overview</h3>
           <div class="tiny" id="instantMeta"></div>
@@ -402,12 +385,11 @@
           </div>
         </div>
 
-        <!-- ✅ Formspree form -->
         <form id="auditForm" action="https://formspree.io/f/xgoyllqb" method="POST">
           <input type="hidden" name="_subject" value="New Free Audit Request - BridgeBay Digital Solutions">
           <input type="hidden" name="_replyto" value="bridgebayinternational@gmail.com">
-          <input type="hidden" name="_next" value="#contact">
-          <!-- This will be filled by JS with the generated overview -->
+          <!-- ✅ Redirect to thanks.html on Netlify -->
+          <input type="hidden" name="_next" value="/thanks.html">
           <input type="hidden" name="instant_audit_overview" id="instant_audit_overview" value="">
 
           <input type="text" name="name" id="f_name" placeholder="Your Name" required>
@@ -417,11 +399,12 @@
           <input type="url"  name="website" id="f_website" placeholder="Website (optional)">
           <input type="url"  name="google_maps_link" id="f_maps" placeholder="Google Maps link (optional)">
           <input type="tel"  name="phone" id="f_phone" placeholder="Phone / WhatsApp">
-
           <textarea name="message" id="f_message" placeholder="Main goal (more calls, more orders, more foot traffic)"></textarea>
 
           <button type="submit">Send Request (We’ll Email Your Detailed Report)</button>
-          <button type="button" class="icon-btn js-open-audit" style="background:#fff;color:rgba(0,0,0,.80);border:1px solid rgba(0,0,0,.12);box-shadow:none;">
+
+          <!-- ✅ FIX: this button should NOT have js-open-audit -->
+          <button type="button" class="icon-btn" id="openInstantAuditBtn">
             Generate Instant Audit Overview
           </button>
         </form>
@@ -439,7 +422,6 @@
   </div>
 </div>
 
-<!-- Modal: Instant Audit -->
 <div class="modal-backdrop" id="auditModal" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="auditModalTitle">
     <div class="modal-head">
@@ -486,10 +468,10 @@
   // Footer year
   document.getElementById("y").textContent = new Date().getFullYear();
 
-  // Modal helpers
   const modal = document.getElementById('auditModal');
   const closeModalBtn = document.getElementById('closeModalBtn');
   const generateBtn = document.getElementById('generateBtn');
+  const openInstantAuditBtn = document.getElementById('openInstantAuditBtn');
 
   function openModal(){
     modal.style.display = 'flex';
@@ -500,26 +482,26 @@
     modal.setAttribute('aria-hidden','true');
   }
 
-  // Open modal from any "Free Audit" button (and still allow scrolling to contact)
-  document.querySelectorAll('.js-open-audit').forEach(el => {
-    el.addEventListener('click', (e) => {
-      // Keep anchor behavior (scroll), but also open modal
-      // (Small timeout lets the browser scroll first)
+  // ✅ Only open modal from CTAs that have .js-open-audit (anchors)
+  document.querySelectorAll('a.js-open-audit').forEach(el => {
+    el.addEventListener('click', () => {
       setTimeout(openModal, 80);
     });
   });
 
+  // ✅ Open modal from the form button explicitly
+  openInstantAuditBtn.addEventListener('click', openModal);
+
   closeModalBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
 
-  // Generate overview
   function buildOverview(data){
     const name = data.restaurant.trim();
     const city = data.city.trim();
-    const address = data.address.trim();
-    const website = data.website.trim();
-    const maps = data.maps.trim();
-    const goal = data.goal.trim();
+    const address = (data.address || "").trim();
+    const website = (data.website || "").trim();
+    const maps = (data.maps || "").trim();
+    const goal = (data.goal || "").trim();
 
     const hasWebsite = website.length > 0;
     const hasMaps = maps.length > 0;
@@ -531,11 +513,12 @@
 
     const scoreClamped = Math.max(35, Math.min(90, score));
 
-    const badges = [];
-    badges.push(`Goal: ${goal}`);
-    badges.push(hasMaps ? "Google Maps link provided" : "Missing Google Maps link");
-    badges.push(hasWebsite ? "Website provided" : "No website provided");
-    badges.push(address.length > 0 ? "Address provided" : "Address missing");
+    const badges = [
+      `Goal: ${goal || "More customers"}`,
+      hasMaps ? "Google Maps link provided" : "Missing Google Maps link",
+      hasWebsite ? "Website provided" : "No website provided",
+      address.length > 0 ? "Address provided" : "Address missing"
+    ];
 
     const text = `
 <b>Business:</b> ${escapeHtml(name)}<br/>
@@ -561,7 +544,6 @@
 
 <b>Next step:</b> Submit the form below and we will email/WhatsApp your detailed audit + plan + pricing.
 `;
-
     return {score: scoreClamped, badges, text};
   }
 
@@ -584,35 +566,33 @@
     badgeWrap.innerHTML = out.badges.map(b => `<span class="badge">✅ ${escapeHtml(b)}</span>`).join('');
     text.innerHTML = out.text;
 
-    // Put overview into hidden form field so it gets emailed to you via Formspree
     hidden.value =
       `Instant Audit Overview\n` +
       `Business: ${data.restaurant}\n` +
       `City/Country: ${data.city}\n` +
-      `Address: ${data.address}\n` +
-      `Website: ${data.website}\n` +
-      `Maps: ${data.maps}\n` +
-      `Goal: ${data.goal}\n\n` +
+      `Address: ${data.address || ""}\n` +
+      `Website: ${data.website || ""}\n` +
+      `Maps: ${data.maps || ""}\n` +
+      `Goal: ${data.goal || ""}\n\n` +
       `Score: ${out.score}/100\n\n` +
       `Notes: Overview generated on-page. Detailed audit to be completed manually.`;
 
     reportBox.style.display = 'block';
 
-    // Prefill the visible form fields too (so user doesn’t retype)
     document.getElementById('f_restaurant').value = data.restaurant;
     document.getElementById('f_city').value = data.city;
-    document.getElementById('f_address').value = data.address;
-    document.getElementById('f_website').value = data.website;
-    document.getElementById('f_maps').value = data.maps;
-    document.getElementById('f_phone').value = data.phone;
+    document.getElementById('f_address').value = data.address || "";
+    document.getElementById('f_website').value = data.website || "";
+    document.getElementById('f_maps').value = data.maps || "";
+    document.getElementById('f_phone').value = data.phone || "";
 
-    // Scroll to the contact section to see the report + form
     document.getElementById('contact').scrollIntoView({behavior:'smooth'});
   }
 
   generateBtn.addEventListener('click', () => {
     const restaurant = document.getElementById('m_restaurant').value;
     const city = document.getElementById('m_city').value;
+
     if(!restaurant.trim() || !city.trim()){
       alert("Please enter Organization/Restaurant name and City/Country.");
       return;
@@ -632,7 +612,6 @@
     closeModal();
   });
 
-  // Optional: allow ESC to close modal
   document.addEventListener('keydown', (e) => {
     if(e.key === 'Escape' && modal.style.display === 'flex') closeModal();
   });
