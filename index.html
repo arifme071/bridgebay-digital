@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BridgeBay Digital Solutions — Restaurant Growth</title>
 
+  <!-- SEO -->
   <meta name="description" content="BridgeBay Digital Solutions helps restaurants across the USA & Bangladesh get more customers through Google Maps and social media." />
 
   <style>
@@ -21,7 +22,8 @@
     }
 
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth;}
+
+    html{scroll-behavior:smooth;} /* ✅ smooth anchor scrolling */
 
     body{
       margin:0;
@@ -33,7 +35,7 @@
 
     .wrap{max-width:var(--max);margin:0 auto;padding:26px 18px 70px}
 
-    /* Header */
+    /* ✅ Ensure header stays clickable (prevents overlay click-block bugs) */
     .topbar{
       display:flex;
       justify-content:space-between;
@@ -44,38 +46,13 @@
       z-index:50;
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-weight:900;
-    }
-
-    /* ✅ Logo image (preferred) + fallback circle if image missing */
-    .logo-wrap{
-      width:42px;height:42px;
-      border-radius:14px;
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .logo{
+      width:36px;height:36px;border-radius:12px;
       background:linear-gradient(135deg,#e27a2d,#ffb17a);
-      box-shadow:0 10px 20px rgba(226,122,45,.22);
-      display:flex;align-items:center;justify-content:center;
-      overflow:hidden;
+      box-shadow:0 10px 20px rgba(226,122,45,.25);
       flex:0 0 auto;
     }
-    .logo-img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      background:#fff;
-    }
-
-    /* ✅ Larger brand text */
-    .brand-title{
-      font-size:16px;
-      line-height:1.1;
-      letter-spacing:.2px;
-    }
-    .tiny{font-size:12px;color:rgba(0,0,0,.55)}
 
     .nav{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
     .nav a{
@@ -88,6 +65,7 @@
     }
     .nav a:hover{color:var(--ink);background:rgba(0,0,0,.03)}
 
+    /* ✅ Use <a> as buttons for anchor links */
     .btn{
       display:inline-flex;
       align-items:center;
@@ -102,6 +80,7 @@
       box-shadow:0 12px 22px rgba(226,122,45,.25);
       cursor:pointer;
       user-select:none;
+      pointer-events:auto;
       white-space:nowrap;
     }
     .btn:hover{filter:brightness(.98)}
@@ -109,25 +88,19 @@
       background:#fff;
       color:var(--ink);
       box-shadow:none;
-      border:1px solid rgba(0,0,0,.10);
     }
     .btn.secondary:hover{background:rgba(255,255,255,.75)}
-
-    /* Less distracting pricing button */
-    .btn.ghost{
-      background:transparent;
-      color:rgba(0,0,0,.72);
-      box-shadow:none;
-      border:1px solid rgba(0,0,0,.10);
-    }
-    .btn.ghost:hover{background:rgba(0,0,0,.03)}
 
     .grid{
       display:grid;
       grid-template-columns:1.2fr 1fr 1fr;
       gap:18px;
+      position:relative;
+      z-index:1;
     }
-    @media(max-width:980px){ .grid{grid-template-columns:1fr} }
+    @media(max-width:980px){
+      .grid{grid-template-columns:1fr}
+    }
 
     .card{
       background:#fff;
@@ -135,7 +108,10 @@
       border-radius:var(--radius);
       padding:22px;
       box-shadow:var(--shadow);
+      position:relative;
+      z-index:1;
     }
+
     .soft{
       background:rgba(255,255,255,.6);
       border:1px solid rgba(0,0,0,.06);
@@ -151,8 +127,7 @@
       letter-spacing:-.6px;
       font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
     }
-    @media(max-width:980px){ h1{font-size:36px} }
-
+    @media(max-width:980px){h1{font-size:36px}}
     h2{
       margin:0 0 10px;
       font-size:30px;
@@ -163,50 +138,28 @@
 
     p{margin:0 0 10px;color:var(--muted)}
     .em{color:var(--ink);font-weight:800}
+    .tiny{font-size:12px;color:rgba(0,0,0,.55)}
     .underline{
       background:rgba(226,122,45,.35);
       padding:0 6px;
       border-radius:8px;
     }
+
     .cta{margin-top:14px;display:flex;gap:12px;flex-wrap:wrap}
 
     ul{margin:10px 0 0;padding-left:18px;color:rgba(0,0,0,.72)}
     li{margin-bottom:8px}
 
-    /* Pricing */
     .two-col{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:14px;
     }
-    @media(max-width:980px){ .two-col{grid-template-columns:1fr} }
-
-    .price-box{
-      border:1px solid rgba(0,0,0,.10);
-      border-radius:14px;
-      padding:14px;
-    }
-    /* ✅ Smaller pricing fonts */
-    .price-num{
-      font-weight:950;
-      font-size:18px;
-      line-height:1.15;
-    }
-    .price-sub{
-      font-weight:800;
-      font-size:13px;
-      color:rgba(0,0,0,.70);
-      margin-top:4px;
-    }
-    .price-note{
-      font-size:11px;
-      color:rgba(0,0,0,.55);
-      margin:0 0 8px;
-    }
+    @media(max-width:980px){.two-col{grid-template-columns:1fr}}
 
     /* Form */
     form{display:grid;gap:10px;margin-top:10px}
-    input,textarea,select{
+    input,textarea{
       width:100%;
       padding:12px 14px;
       border-radius:12px;
@@ -216,106 +169,28 @@
       background:#fff;
     }
     textarea{min-height:92px;resize:vertical}
-    input:focus,textarea:focus,select:focus{
+    input:focus,textarea:focus{
       border-color: rgba(226,122,45,.55);
       box-shadow:0 0 0 4px rgba(226,122,45,.12);
     }
-
-    /* Buttons in form */
-    .form-actions{
-      display:grid;
-      gap:10px;
-      margin-top:2px;
-    }
-    .btn-block{
-      width:100%;
+    button{
       padding:12px 16px;
       border-radius:999px;
       border:none;
-      font-weight:900;
-      cursor:pointer;
-      text-align:center;
-    }
-    .btn-block.primary{
       background:var(--accent);
       color:#fff;
-      box-shadow:0 12px 22px rgba(226,122,45,.25);
-    }
-    .btn-block.primary:hover{filter:brightness(.98)}
-
-    /* ✅ Bring back “previous style” for the instant audit button (orange, rounded) */
-    .btn-block.secondary{
-      background:#fff;
-      color:var(--ink);
-      border:1px solid rgba(0,0,0,.14);
-      box-shadow:none;
-    }
-    .btn-block.secondary:hover{background:rgba(0,0,0,.03)}
-
-    .footer{margin-top:18px;text-align:center;font-size:13px;color:rgba(0,0,0,.55)}
-
-    /* Instant audit output */
-    .report{
-      border:1px solid rgba(0,0,0,.10);
-      border-radius:16px;
-      padding:16px;
-      background:rgba(255,255,255,.8);
-      margin-top:12px;
-    }
-    .badge{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 12px;border-radius:999px;
-      background:#fff;border:1px solid rgba(0,0,0,.10);
-      font-weight:800;font-size:12px;color:rgba(0,0,0,.70);
-      margin-right:8px;margin-top:8px;
-    }
-
-    /* Modal */
-    .modal-backdrop{
-      position:fixed; inset:0;
-      background:rgba(0,0,0,.35);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-      z-index:999;
-    }
-    .modal{
-      width:min(720px, 100%);
-      background:#fff;
-      border-radius:20px;
-      border:1px solid rgba(0,0,0,.12);
-      box-shadow:0 22px 60px rgba(0,0,0,.25);
-      overflow:hidden;
-    }
-    .modal-head{
-      padding:16px 18px;
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-      background:linear-gradient(135deg, rgba(226,122,45,.10), rgba(255,255,255,.9));
-      border-bottom:1px solid rgba(0,0,0,.08);
-    }
-    .modal-body{padding:18px}
-    .modal-actions{
-      padding:16px 18px;
-      border-top:1px solid rgba(0,0,0,.08);
-      display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;
-    }
-    .icon-btn{
-      border:1px solid rgba(0,0,0,.10);
-      background:#fff;
-      border-radius:12px;
-      padding:10px 12px;
       font-weight:900;
       cursor:pointer;
-      color:rgba(0,0,0,.80);
+      box-shadow:0 12px 22px rgba(226,122,45,.25);
     }
-    .icon-btn:hover{background:rgba(0,0,0,.03)}
-    .grid2{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
+    button:hover{filter:brightness(.98)}
+
+    .footer{
+      margin-top:18px;
+      text-align:center;
+      font-size:13px;
+      color:rgba(0,0,0,.55);
     }
-    @media(max-width:720px){ .grid2{grid-template-columns:1fr} }
   </style>
 </head>
 
@@ -325,17 +200,14 @@
   <!-- TOP BAR -->
   <div class="topbar">
     <div class="brand">
-      <div class="logo-wrap" aria-hidden="true">
-        <!-- ✅ Add your logo file as logo.png in same folder -->
-        <img class="logo-img" src="logo.png" alt="BridgeBay logo"
-             onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg,#e27a2d,#ffb17a)';" />
-      </div>
+      <div class="logo" aria-hidden="true"></div>
       <div>
-        <div class="brand-title">BridgeBay Digital Solutions</div>
+        BridgeBay Digital Solutions<br>
         <span class="tiny">USA • Bangladesh</span>
       </div>
     </div>
 
+    <!-- ✅ Working nav links -->
     <nav class="nav" aria-label="Primary">
       <a href="#solution">Solution</a>
       <a href="#audit">Free Audit</a>
@@ -343,7 +215,8 @@
       <a href="#contact">Contact</a>
     </nav>
 
-    <!-- ✅ Removed top-right Free Audit button -->
+    <!-- ✅ Working button link -->
+    <a class="btn" href="#contact">Free Audit</a>
   </div>
 
   <!-- MAIN GRID -->
@@ -363,11 +236,14 @@
         </p>
 
         <div class="cta">
-          <a class="btn js-open-audit" href="#contact">Claim Free Audit</a>
-          <a class="btn ghost" href="#pricing">See Pricing</a>
+          <!-- ✅ Working scroll button -->
+          <a class="btn" href="#contact">Claim Free Audit</a>
+          <a class="btn secondary" href="#pricing">See Pricing</a>
         </div>
 
-        <!-- ✅ Removed the "Fast response..." line -->
+        <div class="tiny" style="margin-top:12px;">
+          Fast response • Clear steps • No long-term contracts
+        </div>
       </section>
 
       <section class="soft" id="problem">
@@ -406,13 +282,10 @@
         </ul>
 
         <div class="cta" style="margin-top:14px;">
-          <a class="btn secondary" href="https://wa.me/19125419169" target="_blank" rel="noopener">Chat on WhatsApp (Fastest)</a>
-          <!-- ✅ keep only this button for free audit modal -->
-          <a class="btn js-open-audit" href="#contact">Request Free Audit</a>
-        </div>
-
-        <div class="tiny" style="margin-top:10px;">
-          Tip: Click “Request Free Audit” to generate your Instant Audit Overview.
+          <!-- ✅ Working WhatsApp link -->
+          <a class="btn secondary" href="https://wa.me/19125419169" target="_blank" rel="noopener">Chat on WhatsApp</a>
+          <!-- ✅ Working scroll link -->
+          <a class="btn" href="#contact">Request Free Audit</a>
         </div>
       </section>
     </div>
@@ -424,67 +297,42 @@
         <p>Start with a free audit. Upgrade after results.</p>
 
         <div class="two-col" style="margin-top:10px;">
-          <div class="price-box">
+          <div style="border:1px solid var(--line);border-radius:14px;padding:14px;">
             <h3>USA</h3>
-            <p class="price-note">Setup + monthly management</p>
-            <div class="price-num">$299 <span class="tiny">setup</span></div>
-            <div class="price-sub">$85 <span class="tiny">/ month</span></div>
+            <p class="tiny" style="margin:0 0 8px;">Setup + monthly management</p>
+            <div style="font-weight:950;font-size:22px;">$299 <span class="tiny">setup</span></div>
+            <div style="font-weight:850;">$85 <span class="tiny">/ month</span></div>
           </div>
 
-          <div class="price-box">
+          <div style="border:1px solid var(--line);border-radius:14px;padding:14px;">
             <h3>Bangladesh</h3>
-            <p class="price-note">Setup + monthly management</p>
-            <div class="price-num">৳12,000 <span class="tiny">setup</span></div>
-            <div class="price-sub">৳3,000 <span class="tiny">/ month</span></div>
+            <p class="tiny" style="margin:0 0 8px;">Setup + monthly management</p>
+            <div style="font-weight:950;font-size:22px;">৳12,000 <span class="tiny">setup</span></div>
+            <div style="font-weight:850;">৳3,000 <span class="tiny">/ month</span></div>
           </div>
         </div>
 
-        <!-- ✅ Removed "Start with Free Audit" button -->
+        <div class="cta" style="margin-top:14px;">
+          <a class="btn" href="#contact">Start with Free Audit</a>
+        </div>
       </section>
 
       <section class="card" id="contact">
         <h2>Request Your Free Audit</h2>
         <p class="tiny">We typically reply within 24–48 hours.</p>
 
-        <p class="tiny" style="margin-top:6px;">
-          No spam. No obligation. We only use this info to prepare your audit.
-        </p>
-
-        <div id="instantReport" class="report" style="display:none;">
-          <h3>Instant Audit Overview</h3>
-          <div class="tiny" id="instantMeta"></div>
-          <div style="margin-top:10px;" id="instantBadges"></div>
-          <div style="margin-top:12px;color:rgba(0,0,0,.78);" id="instantText"></div>
-          <div class="tiny" style="margin-top:10px;">
-            For a detailed audit (ranking checks, competitor deep-dive, action plan), we’ll contact you by email/WhatsApp with the full report + pricing.
-          </div>
-        </div>
-
-        <form id="auditForm" action="https://formspree.io/f/xgoyllqb" method="POST">
+        <!-- ✅ Working Formspree form (GitHub Pages / Netlify compatible) -->
+        <form action="https://formspree.io/f/xgoyllqb" method="POST">
           <input type="hidden" name="_subject" value="New Free Audit Request - BridgeBay Digital Solutions">
           <input type="hidden" name="_replyto" value="bridgebayinternational@gmail.com">
-          <input type="hidden" name="_next" value="/thanks.html">
-          <input type="hidden" name="instant_audit_overview" id="instant_audit_overview" value="">
 
-          <input type="text" name="name" id="f_name" placeholder="Your Name" required>
-          <input type="text" name="restaurant" id="f_restaurant" placeholder="Restaurant / Organization Name" required>
-          <input type="text" name="city" id="f_city" placeholder="City / Country" required>
-          <input type="text" name="address" id="f_address" placeholder="Address (optional)">
-          <input type="url"  name="website" id="f_website" placeholder="Website (optional)">
-          <input type="url"  name="google_maps_link" id="f_maps" placeholder="Google Maps link (optional)">
-          <input type="tel"  name="phone" id="f_phone" placeholder="Phone / WhatsApp">
-          <textarea name="message" id="f_message" placeholder="Main goal (more calls, more orders, more foot traffic)"></textarea>
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="text" name="restaurant" placeholder="Restaurant Name" required>
+          <input type="text" name="city" placeholder="City / Country" required>
+          <input type="tel" name="phone" placeholder="Phone / WhatsApp">
+          <textarea name="message" placeholder="Main goal (more calls, more orders, more foot traffic)"></textarea>
 
-          <div class="form-actions">
-            <button class="btn-block primary" type="submit">
-              Send Request (We’ll Email Your Detailed Report)
-            </button>
-
-            <!-- ✅ Styled “previous style” button -->
-            <button class="btn-block secondary" type="button" id="openInstantAuditBtn">
-              Generate Instant Audit Overview
-            </button>
-          </div>
+          <button type="submit">Get Free Audit</button>
         </form>
 
         <p class="tiny" style="margin-top:10px;">
@@ -493,195 +341,17 @@
         </p>
       </section>
     </div>
+
   </div>
 
   <div class="footer">
     © <span id="y"></span> BridgeBay Digital Solutions • Phase 1: Restaurants & Cafés
   </div>
-</div>
 
-<!-- Modal: Instant Audit -->
-<div class="modal-backdrop" id="auditModal" aria-hidden="true">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="auditModalTitle">
-    <div class="modal-head">
-      <h3 id="auditModalTitle">Instant Free Audit (Overview)</h3>
-      <button class="icon-btn" type="button" id="closeModalBtn" aria-label="Close">✕</button>
-    </div>
-
-    <div class="modal-body">
-      <p class="tiny">Fill these details. We’ll generate an instant overview on the page, and you can submit for a full detailed report.</p>
-
-      <div class="grid2" style="margin-top:10px;">
-        <input id="m_restaurant" type="text" placeholder="Restaurant / Organization Name *" required>
-        <input id="m_city" type="text" placeholder="City / Country *" required>
-
-        <input id="m_address" type="text" placeholder="Address (optional)">
-        <input id="m_phone" type="tel" placeholder="Phone / WhatsApp (optional)">
-
-        <input id="m_website" type="url" placeholder="Website (optional)">
-        <input id="m_maps" type="url" placeholder="Google Maps Link (optional)">
-      </div>
-
-      <div style="margin-top:10px;">
-        <select id="m_goal">
-          <option value="More calls & directions">Goal: More calls & directions</option>
-          <option value="More online orders">Goal: More online orders</option>
-          <option value="More foot traffic">Goal: More foot traffic</option>
-          <option value="More reviews & reputation">Goal: More reviews & reputation</option>
-        </select>
-      </div>
-
-      <div class="tiny" style="margin-top:10px;">
-        Note: “Instant Audit” is an overview. Detailed ranking/competitor checks are done manually by BridgeBay for accuracy.
-      </div>
-    </div>
-
-    <div class="modal-actions">
-      <a class="btn secondary" href="https://wa.me/19125419169" target="_blank" rel="noopener">Chat on WhatsApp</a>
-      <button class="btn" type="button" id="generateBtn">Generate Overview</button>
-    </div>
-  </div>
 </div>
 
 <script>
   document.getElementById("y").textContent = new Date().getFullYear();
-
-  const modal = document.getElementById('auditModal');
-  const closeModalBtn = document.getElementById('closeModalBtn');
-  const generateBtn = document.getElementById('generateBtn');
-  const openInstantAuditBtn = document.getElementById('openInstantAuditBtn');
-
-  function openModal(){
-    modal.style.display = 'flex';
-    modal.setAttribute('aria-hidden','false');
-  }
-  function closeModal(){
-    modal.style.display = 'none';
-    modal.setAttribute('aria-hidden','true');
-  }
-
-  // Only open modal from Free Audit CTAs (anchors)
-  document.querySelectorAll('a.js-open-audit').forEach(el => {
-    el.addEventListener('click', () => setTimeout(openModal, 80));
-  });
-
-  // Open modal from the form button explicitly
-  openInstantAuditBtn.addEventListener('click', openModal);
-
-  closeModalBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
-
-  function escapeHtml(str){
-    return String(str || "").replace(/[&<>"']/g, (m) => ({
-      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-    }[m]));
-  }
-
-  function buildOverview(data){
-    const name = (data.restaurant || "").trim();
-    const city = (data.city || "").trim();
-    const address = (data.address || "").trim();
-    const website = (data.website || "").trim();
-    const maps = (data.maps || "").trim();
-    const goal = (data.goal || "").trim();
-
-    const hasWebsite = website.length > 0;
-    const hasMaps = maps.length > 0;
-
-    const score = 70
-      - (hasWebsite ? 0 : 10)
-      - (hasMaps ? 0 : 10)
-      - (address.length > 0 ? 0 : 5);
-
-    const scoreClamped = Math.max(35, Math.min(90, score));
-
-    const badges = [
-      `Goal: ${goal || "More customers"}`,
-      hasMaps ? "Google Maps link provided" : "Missing Google Maps link",
-      hasWebsite ? "Website provided" : "No website provided",
-      address.length > 0 ? "Address provided" : "Address missing"
-    ];
-
-    const text = `
-<b>Business:</b> ${escapeHtml(name)}<br/>
-<b>Location:</b> ${escapeHtml(city)}${address ? " • " + escapeHtml(address) : ""}<br/><br/>
-
-<b>Instant Visibility Score (Overview):</b> ${scoreClamped}/100<br/>
-<span class="tiny">(This is a quick indicator based on the information provided — detailed checks are done manually.)</span><br/><br/>
-
-<b>Quick Wins (Next 7 Days):</b>
-<ul>
-  <li><b>Google Business Profile:</b> Add fresh photos (food, menu, interior), ensure categories are correct, and post 2 updates/week.</li>
-  <li><b>Reviews:</b> Ask 10 happy customers for reviews this week. Reply to every review within 24–48 hours.</li>
-  <li><b>Local targeting:</b> Run a small FB/IG “Messages” campaign to a 3–5 mile radius (or your target neighborhood).</li>
-  <li><b>Offer testing:</b> Test one simple offer (weekday promo / lunch deal) and track messages + calls.</li>
-</ul>
-
-<b>Next step:</b> Submit the form to receive your detailed audit + plan + pricing.
-`;
-    return {score: scoreClamped, badges, text};
-  }
-
-  function renderOverview(data){
-    const reportBox = document.getElementById('instantReport');
-    const meta = document.getElementById('instantMeta');
-    const badgeWrap = document.getElementById('instantBadges');
-    const text = document.getElementById('instantText');
-    const hidden = document.getElementById('instant_audit_overview');
-
-    const out = buildOverview(data);
-
-    meta.textContent = `${data.restaurant} • ${data.city}`;
-    badgeWrap.innerHTML = out.badges.map(b => `<span class="badge">✅ ${escapeHtml(b)}</span>`).join('');
-    text.innerHTML = out.text;
-
-    hidden.value =
-      `Instant Audit Overview\n` +
-      `Business: ${data.restaurant}\n` +
-      `City/Country: ${data.city}\n` +
-      `Address: ${data.address || ""}\n` +
-      `Website: ${data.website || ""}\n` +
-      `Maps: ${data.maps || ""}\n` +
-      `Goal: ${data.goal || ""}\n`;
-
-    reportBox.style.display = 'block';
-
-    document.getElementById('f_restaurant').value = data.restaurant;
-    document.getElementById('f_city').value = data.city;
-    document.getElementById('f_address').value = data.address || "";
-    document.getElementById('f_website').value = data.website || "";
-    document.getElementById('f_maps').value = data.maps || "";
-    document.getElementById('f_phone').value = data.phone || "";
-
-    document.getElementById('contact').scrollIntoView({behavior:'smooth'});
-  }
-
-  generateBtn.addEventListener('click', () => {
-    const restaurant = document.getElementById('m_restaurant').value;
-    const city = document.getElementById('m_city').value;
-
-    if(!restaurant.trim() || !city.trim()){
-      alert("Please enter Organization/Restaurant name and City/Country.");
-      return;
-    }
-
-    const data = {
-      restaurant,
-      city,
-      address: document.getElementById('m_address').value || "",
-      website: document.getElementById('m_website').value || "",
-      maps: document.getElementById('m_maps').value || "",
-      phone: document.getElementById('m_phone').value || "",
-      goal: document.getElementById('m_goal').value || "More customers"
-    };
-
-    renderOverview(data);
-    closeModal();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && modal.style.display === 'flex') closeModal();
-  });
 </script>
 </body>
 </html>
